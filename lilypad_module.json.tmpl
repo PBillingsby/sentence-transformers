@@ -17,7 +17,7 @@
                     {{ if .input_text }}"INPUT_TEXT={{ js .input_text }}"{{ else }}"INPUT_TEXT=Default text for analysis"{{ end }},
                     {{ if .candidate_texts }}"CANDIDATE_TEXTS={{ js .candidate_texts }}"{{ else }}"CANDIDATE_TEXTS=[\"Default candidate 1\", \"Default candidate 2\"]"{{ end }}
                 ],
-                "Image": "pbillingsby/sentence-transformers:v1"
+                "Image": "pbillingsby/sentence-transformers:v1.1"
             },
             "Engine": "Docker",
             "Network": {
