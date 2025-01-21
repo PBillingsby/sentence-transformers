@@ -64,14 +64,21 @@ def parse_candidate_texts(candidate_texts_raw: str) -> List[str]:
     Parse and validate candidate texts from JSON string
     Args:
         candidate_texts_raw: JSON string of candidate texts
-    Returns:
-        List of candidate text strings
     """
     logger.info("Parsing candidate texts")
     logger.debug(f"Raw candidate texts: {repr(candidate_texts_raw)}")
     
     try:
-        candidate_texts = json.loads(candidate_texts_raw)
+        # First decode - handle outer JSON encoding
+        first_decode = json.loads(candidate_texts_raw)
+        logger.debug(f"First decode result: {repr(first_decode)}")
+
+        # Second decode - handle the actual array
+        if isinstance(first_decode, str):
+            candidate_texts = json.loads(first_decode)
+            logger.debug(f"Second decode result: {repr(candidate_texts)}")
+        else:
+            candidate_texts = first_decode
         
         if not isinstance(candidate_texts, list):
             logger.error(f"Expected list type, got {type(candidate_texts)}")
