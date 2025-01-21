@@ -1,0 +1,42 @@
+{
+    "machine": {
+        "gpu": 0,
+        "cpu": 1000,
+        "ram": 4000
+    },
+    "job": {
+        "APIVersion": "V1",
+        "Spec": {
+            "Deal": {
+                "Concurrency": 1
+            },
+            "Docker": {
+                "Entrypoint": ["python", "/workspace/run_inference.py"],
+                "WorkingDirectory": "/workspace",
+                "EnvironmentVariables": [
+                    {{ if .input_text }}"INPUT_TEXT={{ js .input_text }}"{{ else }}"INPUT_TEXT=Default text for analysis"{{ end }},
+                    {{ if .candidate_texts }}"CANDIDATE_TEXTS={{ js .candidate_texts }}"{{ else }}"CANDIDATE_TEXTS=[\"Default candidate 1\", \"Default candidate 2\"]"{{ end }}
+                ],
+                "Image": "pbillingsby/text-similarity-inference:v1"
+            },
+            "Engine": "Docker",
+            "Network": {
+                "Type": "None"
+            },
+            "Outputs": [
+                {
+                    "Name": "outputs",
+                    "Path": "/outputs"
+                }
+            ],
+            "PublisherSpec": {
+                "Type": "ipfs"
+            },
+            "Resources": {
+                "CPU": "1",
+                "Memory": "4000"
+            },
+            "Timeout": 600
+        }
+    }
+}

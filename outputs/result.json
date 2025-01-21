@@ -1,0 +1,9 @@
+{
+  "input_text": "Which of these actions would help me 'Have more energy'?",
+  "status": "success",
+  "similarities": {
+    "Go to sleep": 0.19647730886936188,
+    "Stay up all night watching tv": 0.1732383668422699,
+    "Have a healthy diet": 0.24113251268863678
+  }
+}
